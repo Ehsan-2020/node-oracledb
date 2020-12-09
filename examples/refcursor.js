@@ -82,14 +82,12 @@ async function run() {
     //   Exactly numRows rows    => there may be more rows to fetch
 
     const resultSet = result.outBinds.cursor;
-    let rows;
-    do {
-      rows = await resultSet.getRows(numRows); // get numRows rows at a time
+    let rows = await resultSet.getRows(numRows); // get numRows rows at a time
       if (rows.length > 0) {
         console.log("getRows(): Got " + rows.length + " rows");
         console.log(rows);
       }
-    } while (rows.length === numRows);
+ 
 
     // always close the ResultSet
     await resultSet.close();
